@@ -33,6 +33,10 @@ ContinuousSpeechRecognizer.prototype.startRecognize = function(successCallback, 
     return cordova.exec(successCallback, errorCallback, "ContinuousSpeechRecognizer", "startRecognize", [maxMatches, language]);
 };
 
+ContinuousSpeechRecognizer.prototype.stopRecognize = function() {
+    return cordova.exec("ContinuousSpeechRecognizer", "stopRecognize");
+};
+
 /**
  * Get the list of the supported languages in IETF BCP 47 format
  * 
