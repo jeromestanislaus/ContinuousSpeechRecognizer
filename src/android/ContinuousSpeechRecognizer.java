@@ -46,6 +46,8 @@ public class ContinuousSpeechRecognizer extends CordovaPlugin {
         this.callbackContext = callbackContext;
         if ("startRecognize".equals(action)) {
             startSpeechRecognitionActivity(args);     
+        } else if ("stopRecognize".equals(action)) {
+            stopRecognize();
         } else if ("getSupportedLanguages".equals(action)) {
             getSupportedLanguages();
         } else {
@@ -136,14 +138,18 @@ public class ContinuousSpeechRecognizer extends CordovaPlugin {
         super.onDestroy();
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                if(sr != null) {
-                    sr.cancel();
-                    sr.destroy();
-                    sr = null;
-                }
+                stopRecognize();
             }
         });
         setStreamVolumeBack();
+    }
+
+    private void stopRecognize() {
+        if(sr != null) {
+            sr.cancel();
+            sr.destroy();
+            sr = null;
+        }
     }
 
     private void muteStreamVolume() {
