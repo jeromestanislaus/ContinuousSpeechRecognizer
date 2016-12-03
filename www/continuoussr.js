@@ -33,8 +33,8 @@ ContinuousSpeechRecognizer.prototype.startRecognize = function(successCallback, 
     return cordova.exec(successCallback, errorCallback, "ContinuousSpeechRecognizer", "startRecognize", [maxMatches, language]);
 };
 
-ContinuousSpeechRecognizer.prototype.stopRecognize = function() {
-    return cordova.exec("ContinuousSpeechRecognizer", "stopRecognize");
+ContinuousSpeechRecognizer.prototype.stopRecognize = function(successCallback, errorCallback) {
+    return cordova.exec(successCallback, errorCallback, "ContinuousSpeechRecognizer", "stopRecognize", []);
 };
 
 /**

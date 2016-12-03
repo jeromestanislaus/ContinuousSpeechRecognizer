@@ -36,7 +36,7 @@ public class ContinuousSpeechRecognizer extends CordovaPlugin {
     private Parameters p;
     private boolean isFlashOn;
 
-    private SpeechRecognizer sr;
+    private SpeechRecognizer sr = null;
     private Intent intent;
     private AudioManager mAudioManager;
     private int mStreamVolume = 0;
@@ -47,7 +47,7 @@ public class ContinuousSpeechRecognizer extends CordovaPlugin {
         if ("startRecognize".equals(action)) {
             startSpeechRecognitionActivity(args);     
         } else if ("stopRecognize".equals(action)) {
-            stopRecognize();
+            pauseRecognize();
         } else if ("getSupportedLanguages".equals(action)) {
             getSupportedLanguages();
         } else {
@@ -150,6 +150,11 @@ public class ContinuousSpeechRecognizer extends CordovaPlugin {
             sr.destroy();
             sr = null;
         }
+    }
+
+    private void pauseRecognize() {
+        if(sr != null)
+            sr.stopListening();
     }
 
     private void muteStreamVolume() {
